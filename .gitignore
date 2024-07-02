@@ -1,2 +1,4 @@
-# Checkpoint
-checkpoint/
+checkpoints/
+test/
+*.zip
+venv/
