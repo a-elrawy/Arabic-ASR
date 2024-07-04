@@ -3,6 +3,16 @@
 
 This project prepares and trains an Automatic Speech Recognition (ASR) system using NeMo. 
 
+## Contents
+- [Requirements](#requirements)
+- [Downloading the Dataset](#downloading-the-dataset)
+- [Data Preparation](#data-preparation)
+- [Training the ASR Model](#training-the-asr-model)
+- [System Architecture and Employed Methodologies](#system-architecture-and-employed-methodologies)
+- [Evaluation](#evaluation)
+- [References](#references)
+
+
 ## Requirements
 If you have issues installing with requirements.txt, you can install the required packages manually using the following commands:
 ```sh
