@@ -5,7 +5,10 @@ This project prepares and trains an Automatic Speech Recognition (ASR) system us
 
 ## Requirements
 ```sh
-pip install -r requirements.txt
+pip install Cython
+pip install nemo_toolkit['asr']
+pip install gdown # Optional for downloading the checkpoint
+pip install kaggle # Optional for downloading the test set 
 ```
 ## Downloading the Dataset
 

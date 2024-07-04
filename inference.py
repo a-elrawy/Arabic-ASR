@@ -7,7 +7,7 @@ from nemo.collections.asr.models import EncDecCTCModel
 from buckwalter import fromBuckWalter
 
 
-def main(test_dir, checkpoint):
+def main(checkpoint, test_dir):
     asr_model = EncDecCTCModel.load_from_checkpoint(checkpoint)
 
     files = os.listdir(test_dir)
