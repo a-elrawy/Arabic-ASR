@@ -4,11 +4,15 @@
 This project prepares and trains an Automatic Speech Recognition (ASR) system using NeMo. 
 
 ## Requirements
-To set up the environment and install necessary packages, run:
+If you have issues installing with requirements.txt, you can install the required packages manually using the following commands:
 ```sh
-pip install -r requirements.txt
+pip install Cython
+pip install nemo_toolkit['asr']
+pip install pytorch-lightning==2.2.1
+pip install einops
+pip install gdown # Optional for downloading the checkpoint
+pip install kaggle # Optional for downloading the test set 
 ```
-
 ## Downloading the Dataset
 
 The dataset can be downloaded from the following link: [MTC-AIC2](https://aicgoveg-my.sharepoint.com/:u:/g/personal/n_essam_aic_gov_eg/EWJtic_m6qhBr_2qha55vt0BnL0qqr22G7JIq72Zo_ueGw?e=zyLLC3).
