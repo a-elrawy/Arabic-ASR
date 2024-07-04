@@ -14,14 +14,46 @@ The dataset can be downloaded from the following link: [MTC-AIC2](https://aicgov
 The dataset contains Egyptian Arabic speech data in WAV format and corresponding transcriptions in text files.
 
 
+After downloading the dataset, extract the contents into the `data` directory.
+
 ## Data Preparation
+The `data` directory contains scripts for preparing the dataset.
+
+### Scripts
+
+1. **Creates manifest files for the NeMo ASR pipeline**:
+     ```sh
+     python data/create_nemo_manifest.py --mode "train"
+     python data/create_nemo_manifest.py --mode "adapt"
+     ```
+
+2. **Training, validation, and test sets**:
+     ```sh
+     python data/train_test_split.py
+     ```
+
 ## Training the ASR Model
-Will be released after the competition ends.
+To train the ASR model, run the following command:
+
+```sh
+python examples/asr/asr_ctc/speech_to_text_ctc.py \
+  --config-path="../conf/conformer/" \
+  --config-name="conformer_ctc_char" \
+  model.train_ds.manifest_filepath="data/train_manifest.json" \
+  model.validation_ds.manifest_filepath="data/dev_manifest.json" \
+  model.test_ds.manifest_filepath="data/test_manifest.json" \
+  trainer.accelerator="gpu" \
+  trainer.devices=-1 \
+  trainer.max_epochs=350
+```
+
+This command trains the ASR model using the Conformer architecture with CTC loss. We've trained the model using the `conformer_ctc_char` configuration, which uses a character-level vocabulary. We stopped training after 350 epochs, as the model achieved satisfactory performance.
 
 
 ## Evaluation
 Download the test set from [here](https://www.kaggle.com/competitions/mct-aic-2/data) and extract in the directory.
-Download the checkpoint and place it in the `/checkpoints` directory.
+
+Download the checkpoint from [here](https://drive.google.com/drive/u/1/folders/1w94yoVpkuAHuFkYbouQzkCsM8t8WZSFS)  and place it in the `/checkpoints` directory.
 
 ```sh
 python inference.py --checkpoint <path_to_checkpoint> --test_dir <path_to_test_dir>

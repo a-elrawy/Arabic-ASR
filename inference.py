@@ -19,7 +19,7 @@ def main(test_dir, checkpoint):
     
     data = list(zip(audio, transcript))
 
-    filename = "submission2.csv"
+    filename = "submission.csv"
 
     with open(filename, mode='w', encoding='utf-8', newline='') as file:
         writer = csv.writer(file)
