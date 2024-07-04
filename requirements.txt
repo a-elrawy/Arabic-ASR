@@ -1,5 +1,5 @@
 Cython
-nemo_toolkit
+nemo_toolkit[asr]
 pytorch-lightning==2.2.1
 einops
 gdown # Optional for downloading the checkpoint
