@@ -101,6 +101,7 @@ Diarization is a critical component of the ASR system, especially for processing
 - **Automatic Speech Recognition (ASR)**: Transcribes the speech segments into text. The ASR model used is `Conformer-CTC-Char`, which is we trained using the mentioned egyptian dataset.
 
 
+
 ### Technical Details
 - **Framework**: NVIDIA NeMo toolkit
 - **Model Architecture**: Conformer
@@ -130,7 +131,7 @@ Download the diarization test set from [here](https://aicgoveg-my.sharepoint.com
 
 To evaluate the diarization model on the test set, run the following command:
 ```sh
-python diarize.py --test_dir <path_to_test_dir> 
+sh diarize.sh wav_dir
 # Results will be saved in the `outputs/json` directory
 # Make sure the checkpoint is in the `checkpoints` directory with the correct name
 ```

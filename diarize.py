@@ -70,10 +70,7 @@ def main(audio_dir):
     output_dir = os.path.join(ROOT, "outputs")
     os.makedirs(output_dir, exist_ok=True)
 
-    for audio_file in os.listdir(audio_dir):
-        if audio_file.endswith(".wav"):
-            audio_path = os.path.join(audio_dir, audio_file)
-            diarize_audio(audio_path, output_dir)
+    diarize_audio(audio_dir, output_dir)
 
 
 if __name__ == "__main__":
