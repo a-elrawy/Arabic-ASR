@@ -129,6 +129,9 @@ python inference.py --checkpoint <path_to_checkpoint> --test_dir <path_to_test_d
 ### Diarization/Full Evaluation
 Download the diarization test set from [here](https://aicgoveg-my.sharepoint.com/:u:/g/personal/n_essam_aic_gov_eg/EdGxtVG3EldPix-hVCIoedcBR2sn-cRiKxfZ6xaLnVie9g?e=th1uWn) and extract in the directory.
 
+
+You can find the results uploaded [here](https://drive.google.com/drive/folders/1iIC9or6DoIpNj7tYMVVr9R-cfdDLHLXQ?usp=sharing).
+
 To evaluate the diarization model on the test set, run the following command:
 ```sh
 sh diarize.sh wav_dir
