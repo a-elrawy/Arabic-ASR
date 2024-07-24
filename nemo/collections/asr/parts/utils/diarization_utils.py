@@ -24,7 +24,7 @@ import numpy as np
 
 from nemo.collections.asr.metrics.der import concat_perm_word_error_rate
 from nemo.collections.asr.metrics.wer import word_error_rate
-from nemo.collections.asr.models import ClusteringDiarizer
+from nemo.collections.asr.models import NeuralDiarizer, ClusteringDiarizer
 from nemo.collections.asr.parts.utils.speaker_utils import (
     audio_rttm_map,
     get_uniqname_from_filepath,
@@ -491,13 +491,13 @@ class OfflineDiarWithASR:
             diar_model_config.diarizer.vad.model_path = None
             diar_model_config.diarizer.vad.external_vad_manifest = oracle_manifest
 
-        diar_model = ClusteringDiarizer(cfg=diar_model_config)
+        diar_model = NeuralDiarizer(cfg=diar_model_config) # ClusteringDiarizer or NeuralDiarizer
         score = diar_model.diarize()
-        if diar_model_config.diarizer.vad.model_path is not None and not diar_model_config.diarizer.oracle_vad:
-            self._get_frame_level_VAD(
-                vad_processing_dir=diar_model.vad_pred_dir,
-                smoothing_type=diar_model_config.diarizer.vad.parameters.smoothing,
-            )
+        # if diar_model_config.diarizer.vad.model_path is not None and not diar_model_config.diarizer.oracle_vad:
+        #     self._get_frame_level_VAD(
+        #         vad_processing_dir=diar_model.vad_pred_dir,
+        #         smoothing_type=diar_model_config.diarizer.vad.parameters.smoothing,
+        #     )
 
         diar_hyp = {}
         for k, audio_file_path in enumerate(self.audio_file_list):
