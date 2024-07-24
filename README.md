@@ -17,7 +17,7 @@ This project prepares and trains an Automatic Speech Recognition (ASR) system us
 If you have issues installing with requirements.txt, you can install the required packages manually using the following commands:
 ```sh
 pip install Cython
-pip install nemo_toolkit['asr']
+pip install --no-build-isolation nemo_toolkit['asr']
 pip install pytorch-lightning==2.2.1
 pip install einops
 pip install gdown # Optional for downloading the checkpoint
