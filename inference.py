@@ -8,7 +8,7 @@ from buckwalter import fromBuckWalter
 
 
 def main(checkpoint, test_dir):
-    asr_model = EncDecCTCModel.load_from_checkpoint(checkpoint)
+    asr_model = EncDecCTCModel.restore_from(checkpoint)
 
     files = os.listdir(test_dir)
     audio_files = [os.path.join(test_dir, x) for x in files ]
@@ -28,7 +28,7 @@ def main(checkpoint, test_dir):
         
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Inference script')
-    parser.add_argument('--checkpoint', type=str, default='checkpoints/checkpoint.ckpt', help='Path to the checkpoint')
+    parser.add_argument('--checkpoint', type=str, default='checkpoints/Conformer-CTC-Char.nemo', help='Path to the checkpoint')
     parser.add_argument('--test_dir', type=str, default='test', help='Path to the test directory')
     args = parser.parse_args()
 

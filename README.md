@@ -91,6 +91,16 @@ The ASR system is built using the NVIDIA NeMo toolkit, which provides a modular 
 - **Model Training**: The training script uses the `conformer_ctc_char` configuration for the Conformer model with character-level vocabulary. The model is trained for 350 epochs using GPU acceleration.
 - **Evaluation**: The trained model is evaluated on a separate test set to assess its performance. Inference is performed using a script that loads the model checkpoint and processes the test data.
 
+### Diarization
+Diarization is a critical component of the ASR system, especially for processing telephone recordings with multiple speakers. The diarization process involves several modules, each configurable via the YAML file.
+
+- **Voice Activity Detection (VAD)**: This module detects speech segments within an audio file. The VAD model is configured with parameters such as window length, shift length, and thresholds for speech onset and offset.
+- **Speaker Embeddings**: Extracts speaker-specific features from audio segments. The `titanet_large` model is used for this purpose, with multiple scales of window and shift lengths to capture various levels of detail.
+- **Clustering**: Groups audio segments into clusters corresponding to different speakers. The clustering module can handle varying numbers of speakers and uses several parameters to enhance speaker counting and clustering accuracy.
+- **Multiscale Diarization Decoder (MSDD)**: Uses speaker embeddings to assign speaker labels to each segment. The MSDD model can infer speaker labels in overlapping speech segments and uses a sigmoid threshold to binarize speaker labels.
+- **Automatic Speech Recognition (ASR)**: Transcribes the speech segments into text. The ASR model used is `Conformer-CTC-Char`, which is we trained using the mentioned egyptian dataset.
+
+
 ### Technical Details
 - **Framework**: NVIDIA NeMo toolkit
 - **Model Architecture**: Conformer
@@ -101,19 +111,29 @@ The ASR system is built using the NVIDIA NeMo toolkit, which provides a modular 
 
 
 ## Evaluation
+### ASR Model Evaluation
 Download the test set from [here](https://www.kaggle.com/competitions/mct-aic-2/data) and extract in the directory.
 
 You can download the checkpoit using the following command:
 ```sh
-gdown https://drive.google.com/drive/u/1/folders/1w94yoVpkuAHuFkYbouQzkCsM8t8WZSFS --folder
+gdown https://drive.google.com/drive/folders/1IpHkiMsOndOm8T6UvX6BHPI1xzVZbMdF --folder
+
 ```
-Or from [here](https://drive.google.com/drive/u/1/folders/1w94yoVpkuAHuFkYbouQzkCsM8t8WZSFS) and place it in the `/checkpoints` directory.
+Or from [here](https://drive.google.com/drive/folders/1IpHkiMsOndOm8T6UvX6BHPI1xzVZbMdF) and place it in the `/checkpoints` directory.
 
 To evaluate the model on the test set, run the following command:
 ```sh
 python inference.py --checkpoint <path_to_checkpoint> --test_dir <path_to_test_dir>
 ```
+### Diarization/Full Evaluation
+Download the diarization test set from [here](https://aicgoveg-my.sharepoint.com/:u:/g/personal/n_essam_aic_gov_eg/EdGxtVG3EldPix-hVCIoedcBR2sn-cRiKxfZ6xaLnVie9g?e=th1uWn) and extract in the directory.
 
+To evaluate the diarization model on the test set, run the following command:
+```sh
+python diarize.py --test_dir <path_to_test_dir> 
+# Results will be saved in the `outputs/json` directory
+# Make sure the checkpoint is in the `checkpoints` directory with the correct name
+```
 
 
 ## References
