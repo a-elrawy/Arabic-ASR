@@ -1,6 +1,6 @@
 Cython
 nemo_toolkit[asr]
-pytorch-lightning==2.2.1
+pytorch-lightning>=2.4.0
 einops
 gdown # Optional for downloading the checkpoint
 kaggle # Optional for downloading the test set 
